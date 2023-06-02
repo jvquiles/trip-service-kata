@@ -3,15 +3,21 @@ using TripServiceKata.Exception;
 
 namespace TripServiceKata.Service
 {
-    public class UserSession
+    public interface IUserSession
     {
-        private static readonly UserSession userSession = new UserSession();
+        bool IsUserLoggedIn(User user);
+        User GetLoggedUser();
+    }
+
+    public class UserSession : IUserSession
+    {
+        private static readonly IUserSession userSession = new UserSession();
 
         private UserSession()
         {
         }
 
-        public static UserSession GetInstance()
+        public static IUserSession GetInstance()
         {
             return userSession;
         }

@@ -7,10 +7,10 @@ namespace TripServiceKata
 {
     public class TripService
     {
-        private UserSession _userSession;
-        private TripDAO _tripDao;
+        private IUserSession _userSession;
+        private ITripDAO _tripDao;
 
-        public TripService(UserSession userSession, TripDAO tripDao)
+        public TripService(IUserSession userSession, ITripDAO tripDao)
         {
             _userSession = userSession;
             _tripDao = tripDao;
