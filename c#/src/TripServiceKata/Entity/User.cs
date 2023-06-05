@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace TripServiceKata.Entity
 {
@@ -18,16 +19,7 @@ namespace TripServiceKata.Entity
 
         public bool AmIFriendOf(User user)
         {
-            foreach (var friend in user.GetFriends())
-            {
-                if (friend.Equals(this))
-                {
-                    return true;
-                    break;
-                }
-            }
-
-            return false;
+            return user.GetFriends().Any(friend => friend.Equals(this));
         }
     }
 }
