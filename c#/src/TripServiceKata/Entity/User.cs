@@ -15,5 +15,19 @@ namespace TripServiceKata.Entity
         {
             friends.Add(user);
         }
+
+        public bool AmIFriendOf(User user)
+        {
+            foreach (var friend in user.GetFriends())
+            {
+                if (friend.Equals(this))
+                {
+                    return true;
+                    break;
+                }
+            }
+
+            return false;
+        }
     }
 }
