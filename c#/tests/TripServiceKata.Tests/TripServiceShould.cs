@@ -42,16 +42,16 @@ namespace TripServiceKata.Tests
         public void GetOneFriendTrip()
         {
             var userSession = Substitute.For<IUserSession>();
-            var user = new User();
             var friend = new User();
-            user.AddFriend(friend);
-            userSession.GetLoggedUser().Returns(friend);
+            var user = new User();
+            friend.AddFriend(user);
+            userSession.GetLoggedUser().Returns(user);
             var tripDao = Substitute.For<ITripDAO>();
             var trip = new Trip();
             tripDao.FindTripsByUser(Arg.Any<User>()).Returns(new List<Trip>() { trip });
             var tripService = new TripService(userSession, tripDao);
 
-            var expectedTrips = tripService.GetTripsByUser(user);
+            var expectedTrips = tripService.GetTripsByUser(friend);
 
             expectedTrips.Should().ContainEquivalentOf(trip);
         }
