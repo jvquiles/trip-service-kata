@@ -22,5 +22,19 @@ namespace TripServiceKata.Tests
 
             action.Should().Throw<UserNotLoggedInException>();
         }
+
+        [Fact]
+        public void GetNoTripsWhenUserHasNoFriends()
+        {
+            var userSession = Substitute.For<IUserSession>();
+            var user = new User();
+            userSession.GetLoggedUser().Returns(user);
+            var tripDao = Substitute.For<ITripDAO>();
+            var tripService = new TripService(userSession, tripDao);
+
+            var trips = tripService.GetTripsByUser(user);
+
+            trips.Should().BeEmpty();
+        }
     }
 }
