@@ -24,14 +24,7 @@ namespace TripServiceKata
                 throw new UserNotLoggedInException();
             }
 
-            var tripList = new List<Trip>();
-            if (loggedUser.AmIFriendOf(user))
-            {
-                tripList = _tripDao.FindTripsByUser(user);
-            }
-
-            return tripList;
-
+            return loggedUser.AmIFriendOf(user) ? _tripDao.FindTripsByUser(user) : new List<Trip>();
         }
     }
 }
